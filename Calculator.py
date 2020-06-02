@@ -8,17 +8,18 @@ button_color = '#18c9c1'
 root = tk.Tk()
 root.geometry("250x400+300+300")
 root.title("Calculator")
-root.resizable(0, 0)
+root.resizable(0, 0) # Allows resizing of widget when run
 root.configure()
 
 
 data = StringVar()
-val = ""
-A = 0
-operator = ""
+val = "" # String variable to hold mathematical input from calculator screen
+operator = "" # String variable to hold operators. Operators can be +,-,/,*
 
 
 # Value Buttons
+# When one of these buttons is clicked 
+# their value is presented on the calculator screen
 def btn1_isclicked():
 	global val
 	val = val + "1"
@@ -72,36 +73,31 @@ def btn0_isclicked():
 
 # Operands	
 def btnPlus_isclicked():
-	global val, A, operator
-	A = int(val)
+	global val, operator
 	operator = "+"
 	val = val + "+"
 	data.set(val)
 
 def btnMinus_isclicked():
-	global val, A, operator
-	A = int(val)
+	global val, operator
 	operator = "-"
 	val = val + "-"	
 	data.set(val)
 
 def btnMulti_isclicked():
-	global val, A, operator
-	A = int(val)
-	operator = "X"
-	val = val + "X"
+	global val, operator
+	operator = "*"
+	val = val + "*"
 	data.set(val)
 
 def btnDivid_isclicked():
-	global val, A, operator
-	A = int(val)
-	operator = "%"
-	val = val + "%"
+	global val, operator
+	operator = "/"
+	val = val + "/"
 	data.set(val)
 	
 def btnClear_isclicked():
-	global val, A, operator
-	A = 0
+	global val, operator
 	operator = ""
 	val = ""
 	data.set(val)
@@ -109,18 +105,16 @@ def btnClear_isclicked():
 
 # Function for calculating result
 def calculate():
-	global val
-	if operator == "%":
-		x = int((val.split("%")[1]))
+	global val, operator
+	# Checking for division by zero
+	if operator == "/":
+		x = int((val.split("/")[1]))
 		if x == 0:
 			messagebox.showerror("Error!!, Division by 0 not allowed")
-			A = ""
 			val = ""
 			data.set(val)
 	else:
-		calc = val
-
-		data.set(str(eval(calc)))
+		data.set(str(eval(val)))
 
 
 
